@@ -1,0 +1,10 @@
+[project]
+name = "wizard-contest-commonlib"
+version = "0.0.1"
+description = "Common code for wizard-contest is stored here"
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "session"
+
+[tool.setuptools]
+package-dir = { "" = "src" }

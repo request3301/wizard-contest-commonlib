@@ -1,6 +1,6 @@
 [project]
 name = "wizard-contest-commonlib"
-version = "0.0.1"
+version = "0.0.2"
 description = "Common code for wizard-contest is stored here"
 
 [tool.pytest.ini_options]

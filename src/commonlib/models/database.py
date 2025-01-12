@@ -7,7 +7,10 @@ from pydantic import BaseModel, ConfigDict
 
 
 class DatabaseModel(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(
+        from_attributes=True,
+        extra='ignore',
+    )
 
 
 class SpellType(str, Enum):

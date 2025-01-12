@@ -55,11 +55,11 @@ class User(DatabaseModel):
 
 
 class SpellCreate(SpellBase):
-    pass
+    wizard_id: int
 
 
 class WizardCreate(WizardBase):
-    pass
+    user_id: int
 
 
 class UserCreate(DatabaseModel):

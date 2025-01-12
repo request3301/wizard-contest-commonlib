@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "wizard-contest-commonlib"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
     { name = "request3301", email = "nadare2357@gmail.com" },
 ]

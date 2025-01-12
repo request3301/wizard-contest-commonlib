@@ -3,7 +3,11 @@ from __future__ import annotations
 from enum import Enum
 from typing import List
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
+
+
+class DatabaseModel(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
 
 
 class SpellType(str, Enum):
@@ -11,7 +15,8 @@ class SpellType(str, Enum):
     PASSIVE = 'PASSIVE'
 
 
-class SpellBase(BaseModel):
+class SpellBase(DatabaseModel):
+
     type_: SpellType
     name: str
     description: str
@@ -22,7 +27,7 @@ class Spell(SpellBase):
     id: int
 
 
-class WizardBase(BaseModel):
+class WizardBase(DatabaseModel):
     name: str
     speed: int
     power: int
@@ -41,7 +46,7 @@ class Wizard(WizardBase):
         return sum(spell.manacost for spell in self.spells)
 
 
-class User(BaseModel):
+class User(DatabaseModel):
     id: int
     wizards: List[Wizard]
 
@@ -54,5 +59,5 @@ class WizardCreate(WizardBase):
     pass
 
 
-class UserCreate(BaseModel):
+class UserCreate(DatabaseModel):
     id: int

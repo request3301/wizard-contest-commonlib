@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import typing as tp
+from typing import Any, Iterable, Iterator, overload
 
 from pydantic import BaseModel
 
@@ -9,8 +9,22 @@ class Pair[T](BaseModel):
     first: T
     second: T
 
-    def __init__(self, values: tp.Iterable[T]) -> None:
-        iterator = iter(values)
+    @overload
+    def __init__(self, first: T, second: T, /) -> None:
+        ...
+
+    @overload
+    def __init__(self, values: Iterable[T], /) -> None:
+        ...
+
+    def __init__(self, *args) -> None:
+        if len(args) == 2:
+            super().__init__(
+                first=args[0],
+                second=args[1],
+            )
+            return
+        iterator = iter(args[0])
         first = next(iterator)
         second = next(iterator)
         try:
@@ -23,10 +37,10 @@ class Pair[T](BaseModel):
             return
         raise ValueError('Expected 2 values, got more')
 
-    def __getattr__(self, item) -> Pair[tp.Any]:
+    def __getattr__(self, item) -> Pair[Any]:
         return Pair([getattr(self.first, item), getattr(self.second, item)])
 
-    def __iter__(self) -> tp.Iterator[T]:
+    def __iter__(self) -> Iterator[T]:
         return iter((self.first, self.second))
 
     def __getitem__(self, index: int) -> T:

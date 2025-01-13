@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import List
 
 from pydantic import BaseModel, ConfigDict
 
@@ -38,7 +37,7 @@ class WizardBase(DatabaseModel):
 
 class Wizard(WizardBase):
     id: int
-    spells: List[Spell]
+    spells: list[Spell]
 
     @property
     def rank(self) -> int:
@@ -48,10 +47,16 @@ class Wizard(WizardBase):
     def _manapool(self) -> int:
         return sum(spell.manacost for spell in self.spells)
 
+    def get_spell(self, id_: int) -> Spell:
+        for spell in self.spells:
+            if spell.id == id_:
+                return spell
+        assert False, f'No spell with such id: {id_}'
+
 
 class User(DatabaseModel):
     id: int
-    wizards: List[Wizard]
+    wizards: list[Wizard]
 
 
 class SpellCreate(SpellBase):

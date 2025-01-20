@@ -1,6 +1,15 @@
 from commonlib.models import Pair
 
 
+def test_keyword_creation() -> None:
+    p = Pair(
+        first=1,
+        second=2,
+    )
+    assert p.first == 1
+    assert p.second == 2
+
+
 def test_creation_from_values() -> None:
     p = Pair(1, 2)
     assert p[0] == 1

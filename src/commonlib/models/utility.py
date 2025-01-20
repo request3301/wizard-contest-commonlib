@@ -10,6 +10,10 @@ class Pair[T](BaseModel):
     second: T
 
     @overload
+    def __init__(self, *, first: T, second: T) -> None:
+        ...
+
+    @overload
     def __init__(self, first: T, second: T, /) -> None:
         ...
 
@@ -17,7 +21,10 @@ class Pair[T](BaseModel):
     def __init__(self, values: Iterable[T], /) -> None:
         ...
 
-    def __init__(self, *args) -> None:
+    def __init__(self, *args, **kwargs) -> None:
+        if len(kwargs) == 2:
+            super().__init__(**kwargs)
+            return
         if len(args) == 2:
             super().__init__(
                 first=args[0],

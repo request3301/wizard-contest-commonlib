@@ -47,6 +47,19 @@ class Wizard(WizardBase):
     def _manapool(self) -> int:
         return sum(spell.manacost for spell in self.spells)
 
+    @property
+    def description(self) -> str:
+        return (
+            f'Wizard\'s name is {self.name}\n'
+            f'They have following spells:\n\n'
+        ) + '\n\n'.join(
+            f'Spell name: {spell.name}\n'
+            f'Type: {str(spell.type_).lower()}\n'
+            f'Description: {spell.description}\n'
+            for spell in self.spells
+        )
+
+
     def get_spell(self, id_: int) -> Spell:
         for spell in self.spells:
             if spell.id == id_:

@@ -20,6 +20,7 @@ class ContestClient:
             "/set_wizard",
             params={"director_id": director_id, "user_id": user_id},
             json=wizard.model_dump(),
+            timeout=None,
         )
         response.raise_for_status()
 
@@ -53,7 +54,9 @@ class ContestClient:
 
     async def get_action(self, director_id: int) -> ContestAction:
         response = await self.client.post(
-            "/get_action", params={"director_id": director_id}
+            "/get_action",
+            params={"director_id": director_id},
+            timeout=None,
         )
         response.raise_for_status()
         return ContestAction(**response.json())

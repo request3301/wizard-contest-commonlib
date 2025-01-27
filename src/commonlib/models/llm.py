@@ -9,6 +9,6 @@ class Message(TypedDict):
     role: tp.Literal['system', 'user', 'assistant']
 
 
-class ActionGenerationResponse(BaseModel):
-    new_messages: list[Message]
-    action: str
+class GenerateActionResponse(BaseModel):
+    new_actions: list[Message]
+    description: str

@@ -10,13 +10,13 @@ from .database import (
     WizardBase,
     WizardCreate,
 )
-from .llm import ActionGenerationResponse, Message
+from .llm import GenerateActionResponse, Message
 from .matchmaking import LobbyStatus
 from .utility import Pair
 
 __all__ = [
     'ActionMetadata',
-    'ActionGenerationResponse',
+    'GenerateActionResponse',
     'ContestAction',
     'ContestResult',
     'LobbyStatus',
